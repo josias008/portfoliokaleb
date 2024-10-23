@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIC-LOG Conception - Sites Web & Logiciels</title>
+    <link href="/chemin-vers-fontawesome/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />   
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f0f6;
+        }
+        header {
+            background-color: #6a1b9a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header img {
+            max-width: 150px;
+        }
+        header h1 {
+            margin: 10px 0;
+            font-size: 2.5rem;
+        }
+        nav {
+            text-align: center;
+            padding: 15px;
+            background-color: #d46611;
+        }
+        nav a {
+            margin: 0 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        nav a:hover {
+            color:  #6a1b9a;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        section h2 {
+            margin-top: 0;
+            color: #6a1b9a;
+        }
+
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .services div {
+            flex: 1;
+            margin: 10px;
+            padding: 20px;
+            background-color: #f4f0f6;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .services div:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .services img {
+            max-width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        /* Styles pour la galerie photo */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .gallery img {
+            width: calc(33% - 10px);
+            margin: 5px;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background-color: #6a1b9a;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+        }
+        footer a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: #ffcc00;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .services {
+                flex-direction: column;
+                align-items: center;
+            }
+            .services div {
+                width: 100%;
+                margin: 10px 0;
+            }
+            .gallery img {
+                width: calc(50% - 10px); /* 2 images per row on medium screens */
+            }
+        }
+        @media (max-width: 480px) {
+            nav a {
+                display: block;
+                margin: 10px 0;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            .gallery img {
+                width: 100%; /* 1 image per row on small screens */
+            }
+        }
+
+        /* Formulaire de devis et Newsletter côte à côte */
+        .flex-row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .quote-form, .newsletter {
+            flex: 1;
+            margin: 10px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .quote-form input, .quote-form textarea, .newsletter input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .quote-form button, .newsletter button {
+            padding: 10px 20px;
+            background-color: #6a1b9a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .quote-form button:hover, .newsletter button:hover {
+            background-color: #4a148c;
+        }
+
+        /* Responsive layout for small screens */
+        @media (max-width: 768px) {
+            .flex-row {
+                flex-direction: column;
+            }
+            .quote-form, .newsletter {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        
+    <style>
+        .logo-container  img{
+           
+            width: 150px; /* Taille du conteneur circulaire */
+            height: 150px;
+            border-radius: 50%; /* Cercle parfait */
+            background-color: white; /* Fond blanc */
+            display: flex;
+            justify-content: center; /* Centrage horizontal */
+            align-items: center; /* Centrage vertical */
+            animation: rotate 5s infinite linear; /* Animation de rotation */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Ombre subtile pour style */
+            margin: 0 auto; /* Centrage horizontal de l'ensemble sur la page */
+        }
+
+        /* Animation de rotation du cercle */
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Style de l'image (le logo) à l'intérieur du cercle */
+        .logo-container img {
+            width: 85%; /* Ajuste la taille du logo à l'intérieur du cercle */
+            height: 8000;
+            border-radius: 50%; /* S'assure que l'image s'ajuste au cercle */
+
+        }
+
+
+/* Section À propos */
+#about {
+    background: linear-gradient(135deg, #f0f0f0 25%, #ffffff 100%);
+    padding: 60px 20px;
+    position: relative;
+}
+
+.about-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1);
+    border: 3px solid #ff7e5f; /* Couleur de la bordure plus vive */
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    text-align: center;
+}
+
+.about-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 126, 95, 0.1); /* Superposition légère de couleur */
+    z-index: -1;
+    transform: rotate(-10deg);
+    transform-origin: top left;
+}
+
+#about h2 {
+    font-size: 2.5rem;
+    color: #ff7e5f; /* Accentuation de la couleur principale */
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+#about p {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-weight: 300;
+}
+
+#about p:last-child {
+    font-style: italic;
+    color: #333;
+
+
+
+           
+        }
+    
+        .robot0 {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 300px;
+            animation: float 3s ease-in-out infinite;
+           
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(300);
+            }
+            50% {
+                transform: translateY(-400px);
+            }
+           
+        }
+    </style>
+
+
+
+
+
+
+
+</head>
+<body>
+
+    <div class="logo-container">
+        <img src="logo.png" alt="Logo TIC-LOG Conception">
+    </div>
+
+   
+        
+
+
+        <h1>TIC-LOG Conception</h1>
+        <p>Spécialistes en conception de sites web, logiciels de gestion et formations informatiques.</p>
+    </header>
+
+    <nav>
+        <a href="#about">À propos</a>
+        <a href="#services">Nos Services</a>
+        <a href="#gallery">Galerie Photo</a>
+        <a href="#quote">Demande de devis</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Section À propos -->
+    <section id="about">
+        <div class="about-container">
+            <h2>À propos de nous</h2>
+            <p>Nous sommes une équipe passionnée, dédiée à fournir des solutions innovantes et écologiques. Notre mission est d'offrir des produits et services qui répondent aux besoins tout en respectant l'environnement.</p>
+            <p>Avec des années d'expérience dans notre domaine, nous mettons un point d'honneur à allier savoir-faire et éthique dans chacune de nos réalisations.</p>
+        </div>
+    </section>
+
+
+    <div class="container">
+
+
+        <section id="services">
+            <center><h2>Nos Services</h2></center>
+            <div class="services">
+                <div>
+                    <img src="web.png" alt="Site Web">
+                    <h3>Conception de Sites Web</h3>
+                    <p>Nous créons des sites web modernes, responsives, et adaptés à vos besoins.</p>
+                </div>
+                <div>
+                    <img src="log.png" alt="Logiciel">
+                    <h3>Développement de Logiciels</h3>
+                    <p>Des logiciels de gestion sur mesure pour simplifier vos processus métiers.</p>
+                </div>
+                <div>
+                    <img src="f.png" alt="Formation">
+                    <h3>Formations en Informatique</h3>
+                    <p>Formations en bureautique, IA, et autres pour vous aider à maîtriser les outils informatiques.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <center><h2></h2></center>
+            <div class="services">
+                <div>
+                    <img src="logiciel.jpg" alt="Site Web">
+                    <h3>Installation de système d'exploitation et de logiciels</h3>
+                    <p>nous installons vos logiciels et systèmes d'exploitations(Windows,Mac OS,Kali...).</p>
+                </div>
+                <div>
+                    <img src="affiche.jpg" alt="Logiciel">
+                    <h3>création d'affiches de cartes, de flyers, de baches </h3>
+                    <p>pour vos evenements et votre visibilité, confiez nous votre communication.</p>
+                </div>
+                <div>
+                    <img src="cm.jpg" alt="Formation">
+                    <h3>Communauty manager</h3>
+                    <p>la gestion de vos Sites internets et vos pages sur les reseaux sociaux.</p>
+                </div>
+            </div>
+        </section>
+        <section id="gallery">
+            <center><h2>Galerie Photo</h2></center>
+            <div class="gallery">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="" alt="Logiciel">
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Conception de Sites Web</h3>
+                            <p>Création de sites web modernes et responsives.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="" alt="Logiciel">
+                        </div>s
+                        <div class="flip-card-back">
+                            <h3>Développement de Logiciels</h3>
+                            <p>Logiciels de gestion sur mesure.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://via.placeholder.com/300x200?text=Formation" alt="Formation">
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Formations en Informatique</h3>
+                            <p>Formations pour maîtriser les outils informatiques.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://via.placeholder.com/300x200?text=Technologie" alt="Technologie">
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Équipe de Développeurs</h3>
+                            <p>Une équipe passionnée par la technologie.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://via.placeholder.com/300x200?text=Événement" alt="Événement">
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Événements et Séminaires</h3>
+                            <p>Participez à nos événements éducatifs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <style>
+            .gallery {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+        
+            .flip-card {
+                background-color: transparent;
+                width: 300px;
+                height: 200px;
+                perspective: 1000px;
+                margin: 10px;
+            }
+        
+            .flip-card-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                transition: transform 0.6s;
+                transform-style: preserve-3d;
+            }
+        
+            .flip-card:hover .flip-card-inner {
+                transform: rotateY(180deg);
+            }
+        
+            .flip-card-front, .flip-card-back {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                backface-visibility: hidden;
+                border-radius: 5px;
+                overflow: hidden;
+            }
+        
+            .flip-card-front img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        
+            .flip-card-back {
+                background-color: #6a1b9a;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                transform: rotateY(180deg);
+                padding: 10px;
+            }
+        </style>
+        
+
+        <!-- Devis et newsletter côte à côte -->
+        <section class="flex-row">
+            <div class="quote-form">
+            <center><h2>Demande de Devis</h2></center>
+                <form action="mailto:joouattara@gmail.com" method="POST" enctype="text/plain">
+                    <input type="text" name="name" placeholder="Votre nom" required>
+                    <input type="email" name="email" placeholder="Votre email" required>
+                    <textarea name="message" rows="5" placeholder="Votre message" required></textarea>
+                    <center><button type="submit">Envoyer ma demande</button></center>
+                </form>
+            </div>
+            <div class="newsletter">
+                <center><h2>Inscription à notre Newsletter</h2></center>
+                <form>
+                    <input type="email" placeholder="Votre email" required>
+                    <center><button type="submit">S'inscrire</button></center>
+                </form>
+            </div>
+        </section>
+    </div>
+
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+        }
+        .contact-circle {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: #4a148c;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+        }
+        .contact-circle p {
+            margin: 10px 0;
+        }
+        .contact-circle a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .contact-circle a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contact-circle">
+        <h2>Contacts</h2>
+        <img class="robot0" img src="robot0.png"  alt="Robot Figurine">
+        <center> </i> <p><strong>Responsable</strong></p></center>
+        <p> <i class="fa-solid fa-circle-user"></i>  <strong>M.Josias Kaleb Ouattara</strong></p>
+
+        <p>  75360505  </p>
+        <p>  78279639 <i class="fa-brands fa-whatsapp"></i></p>
+        <p>  71523890</p>
+        <p> <i class="fa-solid fa-envelope-open-text"></i>  <a href="mailto:joouattara@gmail.com">joouattara@gmail.com</a></p>
+    </div>
+
+</body>
+
+    
+</div>
+
+<footer>
+<style>
+    
+    .robot0 {
+        position: absolute;
+        top: 10px;
+        left:10px;
+        width: 300px;
+        animation: float 3s ease-in-out infinite; }
+
+</style>
+
+
+    <a href="https://www.facebook.com" target="_blank">Facebook</a> |
+    <a href="https://wa.me/1234567890" target="_blank">WhatsApp</a> |
+    <a href="https://www.instagram.com" target="_blank">Instagram</a> |
+
+
+    <footer>
+        <p>&copy; 2024 TIC-LOG Conception. Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>
